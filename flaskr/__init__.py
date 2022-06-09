@@ -4,6 +4,8 @@ from numpy import True_
 
 def create_app(test_config=None):
     # create and configure the app
+    # __name__ == current Python module // helps app locate paths
+    # Instance_r_c tell app files are located outiste flaskr package
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
