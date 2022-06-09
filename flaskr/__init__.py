@@ -7,11 +7,17 @@ def create_app(test_config=None):
     # __name__ == current Python module // helps app locate paths
     # Instance_r_c tell app files are located outiste flaskr package
     app = Flask(__name__, instance_relative_config=True)
+
+    # sets default configurtation
+    # secret = 'dev' during development, should be overridden with random num
+    # DB is where the SQLite DB is saved, unduer app.i_p
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaksr.sqlite'),
     )
 
+    # app.config.from_py overrides default values with 'config.py'
+    # app.c.f_p would store real SECRET_KEY
     if test_config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile('config.py', silent=True)
@@ -20,6 +26,7 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
 
     # ensure the instance folder exists
+    # needed to ensure SQL DB file goes there
     try:
         os.makedirs(app.instance_path)
     except OSError:
