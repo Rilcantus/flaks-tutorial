@@ -29,15 +29,18 @@ def close_db(e=None):
         db.close()
 
 def init_db():
+    # runs get_db function, connects to DATABASE
     db = get_db()
 
+    # open_r locations the .sql file
+    # with it open, run the read command from the file
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
-@click.command('init-db')
+
+@click.command('init-db') # create CLI 'init-db', runs 'init_db'
 @with_appcontext
 def init_db_command():
     """Clear the existing data and create new tables."""
     init_db()
     click.echo('Initialized the database.')
-    
