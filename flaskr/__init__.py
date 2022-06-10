@@ -37,4 +37,8 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
     
+    # calls close_db and creates CLI init-db cmd
+    from . import db
+    db.init_app(app)
+
     return app
