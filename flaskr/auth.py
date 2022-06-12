@@ -1,4 +1,3 @@
-from crypt import methods
 import functools
 from click import password_option
 
