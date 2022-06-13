@@ -74,7 +74,7 @@ def create():
 def update(id):
     post = get_post(id)
 
-    if request.method == 'POST':
+    if request.method == ('POST,'):
         title = request.form['title']
         body = request.form['body']
         error = None
@@ -92,11 +92,12 @@ def update(id):
                 (title, body, id)
             )
             db.commit()
+            # if it updated corrected then return to main
             return redirect(url_for('blog.index'))
-    
+    # return back to update if not able with same post
     return render_template('blog/update.html', post=post)
 
-@bp.route('/<int:id>/delete', methods=('POST'))
+@bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
     get_post(id)
